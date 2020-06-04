@@ -14,8 +14,8 @@ public:
 	virtual void render() override;
 	virtual void updateFrame(const video_frame& frame) override;
 	virtual void draw(uint8_t *buffer, size_t length, size_t width, size_t height, int rotation) override;
-	virtual void applyFilter(int filter) override;
-    virtual int getMaxFilter() override;
+	virtual void setParameters(uint32_t params) override;
+    virtual uint32_t getParameters() override;
 	virtual bool createTextures() override;
 	virtual bool updateTextures() override;
 	virtual void deleteTextures() override;
@@ -47,6 +47,7 @@ private:
 	GLint m_textureYLoc;
 	GLint m_textureULoc;
 	GLint m_textureVLoc;
+	GLint m_textureSize;
 	GLint m_uniformProjection;
 	GLint m_uniformRotation;
     GLint m_uniformScale;

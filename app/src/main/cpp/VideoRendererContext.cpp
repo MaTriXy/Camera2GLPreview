@@ -28,14 +28,14 @@ void VideoRendererContext::draw(uint8_t *buffer, size_t length, size_t width, si
     m_pVideoRenderer->draw(buffer, length, width, height, rotation);
 }
 
-void VideoRendererContext::applyFilter(int filter)
+void VideoRendererContext::setParameters(uint32_t params)
 {
-    m_pVideoRenderer->applyFilter(filter);
+    m_pVideoRenderer->setParameters(params);
 }
 
-int VideoRendererContext::getMaxFilter()
+uint32_t VideoRendererContext::getParameters()
 {
-    return m_pVideoRenderer->getMaxFilter();
+    return m_pVideoRenderer->getParameters();
 }
 
 void VideoRendererContext::createContext(JNIEnv *env, jobject obj, jint type)
@@ -52,7 +52,7 @@ void VideoRendererContext::storeContext(JNIEnv *env, jobject obj, VideoRendererC
 
     if (NULL == cls)
     {
-        LOGE("Could not find com/media/camera2glpreview/render/VideoRenderer.");
+        LOGE("Could not find com/media/camera/preview/render/VideoRenderer.");
         return;
     }
 
