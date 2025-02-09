@@ -21,18 +21,14 @@ public class GLVideoRenderer extends VideoRenderer implements GLSurfaceView.Rend
         mGLSurface.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
     }
 
-    public void requestRender() {
-        if (mGLSurface != null) {
-            mGLSurface.requestRender();
-        }
-    }
-
     public void destroyRender() {
         destroy();
     }
 
+    @Override
     public void drawVideoFrame(byte[] data, int width, int height, int rotation) {
         draw(data, width, height, rotation);
+        requestRender();
     }
 
     public void setVideoParameters(int params) {
@@ -50,11 +46,17 @@ public class GLVideoRenderer extends VideoRenderer implements GLSurfaceView.Rend
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-        init(null, width, height);
+        init(null, null, width, height);
     }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
+    }
+
+    private void requestRender() {
+        if (mGLSurface != null) {
+            mGLSurface.requestRender();
+        }
     }
 }
